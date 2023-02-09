@@ -161,3 +161,86 @@ const inventory = [
     sold: 8,
   },
 ];
+
+console.log("----- opdracht 1a ----");
+const brandsTv = inventory.map((inventory) => {
+return inventory.type
+});
+console.log(brandsTv);
+
+console.log("----- opdracht 1b ----");
+const soldOut = inventory.filter((inventory) => {
+  return inventory.originalStock - inventory.sold === 0;;
+})
+console.log(soldOut);
+
+console.log("----- opdracht 1c ----");
+const hasAmbilight = inventory.filter ((inventory) => {
+  return inventory.options.ambiLight === true;
+});
+console.log(hasAmbilight);
+
+console.log("----- opdracht 1d ----");
+inventory.sort((a, b) => {
+if (a.price > b.price){
+  return 1
+} else if (a.price < b.price){
+  return -1
+} else {
+  return 0
+}
+});
+console.log(inventory);
+
+console.log("----- opdracht 2a ----");
+const sold = inventory.map((inventory) => {
+  return inventory.sold
+});
+console.log(sold);
+
+console.log("----- opdracht 2b ----");
+const soldTv = document.getElementById("soldTv");
+soldTv.textContent = "Er zijn " + sold + " tv's verkocht";
+
+console.log("----- opdracht 2c ----");
+const bought = inventory.map((inventory) => {
+  return inventory.originalStock
+});
+console.log(bought);
+console.log("----- opdracht 2d ----")
+const boughtTv = document.getElementById("boughtTV");
+boughtTv.textContent = "Er zijn " + bought + " tv's ingekocht";
+
+console.log("----- opdracht 2e ----");
+  let result = [];
+  for(let i = 0 ; i < bought.length; i++){
+    result.push(bought[i] - sold[i])
+  }
+
+const remainingStock = document.getElementById("remainingStock");
+remainingStock.textContent = "er moeten nog " + result + " tv's verkocht worden";
+
+console.log("----- opdracht 3a ----");
+
+const uniqueBrands = Array.from(new Set(inventory.map(brand => brand.brand)));
+console.log(uniqueBrands);
+
+console.log("----- opdracht 3b ----");
+function unique(){
+ return  Array.from(new Set(inventory.map(brand => brand.brand))) }
+console.log(unique());
+
+
+
+//Side projectje :D
+let select = document.createElement("select");
+select.id = "brand-select";
+uniqueBrands.unshift("All");
+
+for (let i = 0; i < uniqueBrands.length; i++) {
+  let option = document.createElement("option");
+  option.value = uniqueBrands[i];
+  option.text = uniqueBrands[i];
+  select.appendChild(option);
+}
+document.body.appendChild(select);
