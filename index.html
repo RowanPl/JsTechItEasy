@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
     <title>Tech It Easy Dashboard</title>
 </head>
 <body>
+<section>
 <p id="soldTv"></p>
 <p id="boughtTV"></p>
 <p id="remainingStock"></p>
+</section>
+<section>
+<span id="tv"></span>
+</section>
+<section id="parent">
+<ul id="inventory-models"></ul>
+</section>
 
+<span>
+ <option id="select">Select your brand:</option>
 
- <option id="select-Brand">Select your brand:</option>
-
-
-
+<button id="sortPrice">Sorteer op prijs</button>
+<button id="ambilight">Heeft ambilight</button>
+<button id="soldOut">Is uitverkocht</button>
+</span>
 
 <script src="main.js"></script>
 </body>

@@ -175,21 +175,25 @@ const soldOut = inventory.filter((inventory) => {
 console.log(soldOut);
 
 console.log("----- opdracht 1c ----");
-const hasAmbilight = inventory.filter ((inventory) => {
-  return inventory.options.ambiLight === true;
-});
+function hasAmbilight(array) {
+  return array.filter((inventory) => {
+    return inventory.options.ambiLight === true;
+  });
+}
 console.log(hasAmbilight);
 
 console.log("----- opdracht 1d ----");
-inventory.sort((a, b) => {
-if (a.price > b.price){
-  return 1
-} else if (a.price < b.price){
-  return -1
-} else {
-  return 0
+function sortPrice(Array) {
+  inventory.sort((a, b) => {
+    if (a.price > b.price) {
+      return 1
+    } else if (a.price < b.price) {
+      return -1
+    } else {
+      return 0
+    }
+  });
 }
-});
 console.log(inventory);
 
 console.log("----- opdracht 2a ----");
@@ -212,13 +216,21 @@ const boughtTv = document.getElementById("boughtTV");
 boughtTv.textContent = "Er zijn " + bought + " tv's ingekocht";
 
 console.log("----- opdracht 2e ----");
-  let result = [];
-  for(let i = 0 ; i < bought.length; i++){
-    result.push(bought[i] - sold[i])
-  }
 
-const remainingStock = document.getElementById("remainingStock");
-remainingStock.textContent = "er moeten nog " + result + " tv's verkocht worden";
+function stockLeft(bought, sold) {
+  let result = [];
+  for (let i = 0; i < bought.length; i++) {
+    let stock = bought[i] - sold[i];
+    if (stock > 0) {
+      result.push(stock);
+    }
+  }
+  console.log(result)
+  return result;
+}
+
+  const remainingStock = document.getElementById("remainingStock");
+ remainingStock.textContent = "er moeten nog " + stockLeft(bought, sold) + " tv's verkocht worden";
 
 console.log("----- opdracht 3a ----");
 
@@ -230,12 +242,99 @@ function unique(){
  return  Array.from(new Set(inventory.map(brand => brand.brand))) }
 console.log(unique());
 
+console.log("----- opdracht 4a ----");
+function container(tvArray){
+  return `${tvArray.brand} ${tvArray.type} - ${tvArray.name}`;
+}
+console.log(container(inventory[0]));
 
+console.log("----- opdracht 4b ----");
+function priceCheck(price){
+  return ` €${price.price},-`
+}
+console.log(priceCheck(inventory[0]));
+
+console.log("----- opdracht 4c ----");
+function sizes(tvArray){
+   let output = '';
+
+  for (let j = 0; j < tvArray.length; j++) {
+    const SizeInches  = tvArray[j];
+    const SizeCm = SizeInches * 2.54;
+
+    output = output + `${SizeInches} inch (${Math.round(SizeCm)} cm)`;
+
+    if (j < tvArray.length -1) {
+      output = `${output} | `;
+    }
+  }
+  return output;
+}
+console.log(sizes(inventory[0].availableSizes))
+
+console.log("----- opdracht 4d ----");
+const tv = document.getElementById("tv");
+const i = 0;
+tv.innerHTML = `
+<p>${container(inventory[i])}</p>
+<p>${priceCheck(inventory[i])}</p>
+<p>${sizes(inventory[i])}</p>
+`;
+
+
+  function generateTvList(tvArray) {
+    const tvModelList = document.getElementById('inventory-models');
+
+    const modelItems = tvArray.map((tvObject) => {
+      return `
+    <section id="Containero">
+      <li>
+        <h3>${container(tvObject)}</h3>
+        <h4>${priceCheck(tvObject)}</h4>
+        <p>${sizes(tvObject.availableSizes)}</p>
+      </li>
+      </section>
+    `;
+    });
+
+    tvModelList.innerHTML = `${modelItems.join('')}`;
+  }
+  generateTvList(inventory);
+
+generateTvList(inventory);
+
+const sortpriceButton = document.getElementById('sortPrice');
+const filterambilight = document.getElementById('ambilight');
+const soldout = document.getElementById('soldOut');
+
+
+sortpriceButton.addEventListener('click', sortTv);
+function sortTv(){
+  sortPrice(inventory);
+  generateTvList(inventory);
+}
+filterambilight.addEventListener('click', hasAmbi);
+function hasAmbi(){
+  const filteredInv = hasAmbilight(inventory);
+  generateTvList(filteredInv);
+}
+soldout.addEventListener('click', isSoldOut);
+function isSoldOut() {
+  let updatedInv = [];
+  for (let i = 0; i < inventory.length; i++) {
+    if (bought[i] <= sold[i]) {
+      updatedInv.push(inventory[i]);
+    }
+  }
+  generateTvList(updatedInv);
+}
 
 //Side projectje :D
 let select = document.createElement("select");
 select.id = "brand-select";
 uniqueBrands.unshift("All");
+
+
 
 for (let i = 0; i < uniqueBrands.length; i++) {
   let option = document.createElement("option");
@@ -244,3 +343,17 @@ for (let i = 0; i < uniqueBrands.length; i++) {
   select.appendChild(option);
 }
 document.body.appendChild(select);
+
+select.addEventListener('change', () => {
+  let selectedBrand = select.value;
+  console.log(selectedBrand);
+const sorted = inventory.filter((inventory) => {
+  return inventory.brand === selectedBrand
+});
+
+  if (selectedBrand === "All") {
+    generateTvList(inventory);
+  } else {
+   generateTvList(sorted)
+    console.log(sorted)
+  }});
