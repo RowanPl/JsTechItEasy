@@ -6,6 +6,9 @@
 }
 #remainingStock{
     color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #miniContainer{
     display: flex;

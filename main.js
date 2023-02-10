@@ -219,7 +219,7 @@ const bought = inventory.map((inventory) => {
 console.log(bought);
 console.log("----- opdracht 2d ----")
 const boughtTv = document.getElementById("boughtTV");
-boughtTv.textContent = `Er zijn  bought ${sumArray(bought)}  tv's ingekocht`;
+boughtTv.textContent = `Er zijn ${sumArray(bought)}  tv's ingekocht`;
 
 console.log("----- opdracht 2e ----");
 
@@ -236,7 +236,8 @@ function stockLeft(bought, sold) {
 }
 
   const remainingStock = document.getElementById("remainingStock");
- remainingStock.textContent = `Er moeten nog ${sumArray(stockLeft(bought, sold))}  tv's verkocht worden`;
+ remainingStock.innerHTML = `<p>Er moeten nog ${sumArray(stockLeft(bought, sold))}  tv's verkocht worden,</p>
+<p>Dus zet hem op!</p>`;
 
 console.log("----- opdracht 3a ----");
 
