@@ -7,6 +7,21 @@
 #remainingStock{
     color: red;
 }
+#miniContainer{
+    display: flex;
+    flex-basis: 30px;
+    background-color: orange;
+    align-items: center;
+
+}
+#biggerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 40px;
+    gap: 30px;
+
+}
 * {
     margin: 0;
     padding: 0;
@@ -42,4 +57,58 @@ li{
 }
 span{
     margin-left: 30px;
+}
+
+
+
+
+
+
+
+
+
+body {
+    background-color: white;
+    color: black;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+#toggle-dark-mode {
+    display: none;
+}
+
+#slider {
+    width: 30px;
+    height: 20px;
+    background-color: black;
+    border-radius: 34px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 20px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+#toggle-dark-mode:checked + #slider {
+    background-color: white;
+}
+
+#slider::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background-color: Red;
+    border-radius: 50%;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    transition: 0.3s;
+}
+
+#toggle-dark-mode:checked + #slider::before {
+    transform: translateX(13px);
 }

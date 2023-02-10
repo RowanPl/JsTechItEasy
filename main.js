@@ -200,11 +200,17 @@ console.log("----- opdracht 2a ----");
 const sold = inventory.map((inventory) => {
   return inventory.sold
 });
-console.log(sold);
+console.log(sumArray(sold));
+
+function sumArray(array) {
+  return array.reduce((number, currentValue) => {
+    return number + currentValue;
+  }, 0);
+}
 
 console.log("----- opdracht 2b ----");
 const soldTv = document.getElementById("soldTv");
-soldTv.textContent = "Er zijn " + sold + " tv's verkocht";
+soldTv.textContent = `Er zijn   ${sumArray(sold)} tv's verkocht`;
 
 console.log("----- opdracht 2c ----");
 const bought = inventory.map((inventory) => {
@@ -213,7 +219,7 @@ const bought = inventory.map((inventory) => {
 console.log(bought);
 console.log("----- opdracht 2d ----")
 const boughtTv = document.getElementById("boughtTV");
-boughtTv.textContent = "Er zijn " + bought + " tv's ingekocht";
+boughtTv.textContent = `Er zijn  bought ${sumArray(bought)}  tv's ingekocht`;
 
 console.log("----- opdracht 2e ----");
 
@@ -230,7 +236,7 @@ function stockLeft(bought, sold) {
 }
 
   const remainingStock = document.getElementById("remainingStock");
- remainingStock.textContent = "er moeten nog " + stockLeft(bought, sold) + " tv's verkocht worden";
+ remainingStock.textContent = `Er moeten nog ${sumArray(stockLeft(bought, sold))}  tv's verkocht worden`;
 
 console.log("----- opdracht 3a ----");
 
@@ -287,7 +293,7 @@ tv.innerHTML = `
 
     const modelItems = tvArray.map((tvObject) => {
       return `
-    <section id="Containero">
+    <section id="Container">
       <li>
         <h3>${container(tvObject)}</h3>
         <h4>${priceCheck(tvObject)}</h4>
@@ -357,3 +363,12 @@ const sorted = inventory.filter((inventory) => {
    generateTvList(sorted)
     console.log(sorted)
   }});
+
+
+
+
+const toggleDarkMode = document.getElementById('toggle-dark-mode');
+
+toggleDarkMode.addEventListener('click', function () {
+  document.body.classList.toggle('dark-mode');
+});
