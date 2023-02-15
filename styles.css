@@ -1,0 +1,117 @@
+#soldTv{
+    color: green;
+}
+#boughtTV{
+    color: blue;
+}
+#remainingStock{
+    color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#miniContainer{
+    display: flex;
+    flex-basis: 30px;
+    background-color: orange;
+    align-items: center;
+
+}
+#biggerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 40px;
+    gap: 30px;
+
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    margin: 20px 20px;
+   border: black 20px;
+}
+#Container{
+background-color: grey;
+    gap: 30px;
+    padding: 10px;
+    flex-basis: 600px;
+    border: black 3px;
+}
+
+#parent{
+display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+#inventory-models{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 20px;
+    gap: 30px;
+    justify-content: center;
+}
+li{
+    list-style: none;
+}
+span{
+    margin-left: 30px;
+}
+
+
+
+
+
+
+
+
+
+body {
+    background-color: white;
+    color: black;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+#toggle-dark-mode {
+    display: none;
+}
+
+#slider {
+    width: 30px;
+    height: 20px;
+    background-color: black;
+    border-radius: 34px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 20px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+#toggle-dark-mode:checked + #slider {
+    background-color: white;
+}
+
+#slider::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background-color: Red;
+    border-radius: 50%;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    transition: 0.3s;
+}
+
+#toggle-dark-mode:checked + #slider::before {
+    transform: translateX(13px);
+}
